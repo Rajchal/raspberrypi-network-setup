@@ -298,4 +298,10 @@ sudo systemctl mask systemd-resolved
 
 ## By doing all this once reboot your system 
 
-````
+```bash
+sudo reboot
+```
+
+## Hopefully this should work notify me if you get better methods in `rajchalanjal1@gmail.com`
+
+
