@@ -207,7 +207,7 @@ sudo systemctl stop dhcpcd
 sudo journalctl -veu dnsmasq.service
 ```
 
-> ![IMPORTANT]
+> [!IMPORTANT]
 > use iwconfig to see if the network is in managed state or monitor state
 
 ```bash
