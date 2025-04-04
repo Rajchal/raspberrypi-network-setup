@@ -272,4 +272,30 @@ sudo iw reg set 00
 ```
 this sets to global which will work now
 
+> Add iw package if it doesnt exist
+> ```bash
+> sudo iw reg get
+> ```
 
+## Disabling network dispatcher also helped
+
+```bash
+sudo systemctl stop networkd-dispatcher
+sudo systemctl disable networkd-dispatcher
+```
+
+## Stop and disable `systemd-resolved`
+```bash
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+```
+
+also mask it bro it really helps
+
+```bash
+sudo systemctl mask systemd-resolved
+```
+
+## By doing all this once reboot your system 
+
+````
