@@ -198,4 +198,78 @@ sudo lsof -i :53
 sudo systemctl stop dhcpcd
 ```
 
+## Verify dnsmasq Config
+
+## Restart dnsmasq
+
+## keep reviewing logs using 
+```bash
+sudo journalctl -veu dnsmasq.service
+```
+
+> ![IMPORTANT]
+> use iwconfig to see if the network is in managed state or monitor state
+
+```bash
+sudo apt install wireless-tools
+```
+
+Check wlan0 status
+
+```bash
+iwconfig wlan0
+```
+
+## Check journal of hostapd aswell there can be problem there
+
+```bash
+sudo apt update
+sudo apt install net-tools
+```
+
+install net-tools for usinf ifconfig to bring up or down the wlan0
+
+```bash
+# example
+sudo ifconfig wlan0 down
+```
+
+you can also use ip command
+
+```bash
+sudo ip link set wlan0 down
+sudo ip link set wlan0 up
+```
+
+## Rebooting also helps sometimes
+```bash
+sudo reboot
+```
+
+## Create PID dir 
+```bash
+sudo mkdir -p /run/hostapd
+sudo chown root:root /run/hostapd
+sudo chmod 755 /run/hostapd
+```
+
+## Stop conflicting services
+
+```bash
+sudo systemctl stop wpa_supplicant
+sudo systemctl disable wpa_supplicant
+sudo systemctl stop NetworkManager
+sudo systemctl disable NetworkManager
+```
+
+## This is what worked for me
+- Since i was getting error that my firmware is rejecting country settings 
+- remember this error is only visible in raspberry pi tty not in ssh connection
+- i realised it only after looking at it and not in the ssh terminal
+
+```bash
+sudo iw reg set 00
+```
+this sets to global which will work now
+
 
