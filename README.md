@@ -128,4 +128,74 @@ sudo systemctl start ssh
 
 ## So upto this point you are consider to make the thing working but it wont so after this ima tell you how to fix
 
+Install Necessary Softwartes
+```bash
+sudo apt install hostapd dnsmasq netfilter-persistent iptables-persistent -y
+sudo systemctl stop hostapd
+sudo systemctl stop dnsmasq
+```
+
+Config Static IP
+```bash
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+add the following
+
+```bash
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: true
+  wifis:
+    wlan0:
+      dhcp4: no
+      addresses:
+        - 192.168.4.1/24
+      access-points:
+        "Your_SSID":
+          password: "Your_Passphrase"
+```
+
+apply 
+```bash
+sudo netplan apply
+```
+
+If you get masking error
+```bash
+sudo systemctl unmask hostapd
+```
+
+start hostapd
+```bash
+sudo systemctl start hostapd
+sudo systemctl enable hostapd
+```
+
+restart dnsmasq
+```bash
+sudo systemctl restart dnsmasq
+sudo systemctl enable dnsmasq
+```
+
+check status
+```bash
+sudo systemctl status dnsmasq
+```
+## Mostly you come to port conflits in this method you can stop this procces which happens in :67 and :53
+
+1. Check for services using port 67 and 53
+```bash
+sudo lsof -i :67
+sudo lsof -i :53
+```
+
+2. Stop any conflicting service example if `dhcp`
+```bash
+sudo systemctl stop dhcpcd
+```
+
 
