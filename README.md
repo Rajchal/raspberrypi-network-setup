@@ -1,4 +1,4 @@
-# raspberrypi-network-setup
+# Raspberrypi Network Setup
 
 This is quick guide to network setup for raspberrypi and mistakes to not make
 
