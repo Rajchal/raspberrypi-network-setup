@@ -52,6 +52,9 @@ sudo systemctl mask systemd-resolved
 ```bash
 sudo nano /etc/dnsmasq.conf
 ```
+
+- put this
+```bash
 interface=wlan0  # Replace with your wireless interface
 dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
 dhcp-option=3,192.168.4.1
